@@ -25,22 +25,8 @@ indexer-install:
 indexer:
 	cd indexer && npm start
 
-# ── Frontend ──────────────────────────────────────────────────────────────────
-frontend-install:
-	cd frontend && npm install
-
-frontend:
-	cd frontend && npm run dev
-
-frontend-build:
-	cd frontend && npm run build
-
 # ── All ───────────────────────────────────────────────────────────────────────
-install: indexer-install frontend-install
-
-dev:
-	$(MAKE) -j2 indexer frontend
+install: indexer-install
 
 clean:
 	cargo clean
-	rm -rf frontend/dist

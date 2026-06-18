@@ -1,4 +1,4 @@
-# ⬡ Soroban Smart Block Explorer
+# ⬡ PERO-J — Soroban Block Explorer
 
 > **Human-readable Soroban contract events on Stellar.**
 > Instead of raw XDR bytes, users see: *"Address GABC… swapped 100 USDC → 98.7 XLM on StellarSwap at ledger #4521983."*
@@ -57,21 +57,27 @@ Soroban Smart Block Explorer decodes contract calls on the fly using an ABI-like
 
 ## Quick Start
 
+This project is split into two repositories:
+
+- **[pero-j-frontend](https://github.com/your-org/pero-j-frontend)** — React/Vite/TypeScript frontend
+- **pero-j-backend** (this repo) — Node.js indexer + Express API + Rust/Soroban contracts
+
 ### Prerequisites
 - Rust + `wasm32-unknown-unknown` target
 - [Stellar CLI](https://developers.stellar.org/docs/tools/developer-tools/cli/stellar-cli)
 - Node.js ≥ 20
 - PostgreSQL
 
-### 1. Clone & configure
+### Backend Setup
+
 ```bash
-git clone https://github.com/your-org/Soroban-Smart-Block
-cd Soroban-Smart-Block
+git clone https://github.com/your-org/pero-j-backend
+cd pero-j-backend
 cp .env.example .env
 # Edit .env with your RPC URL and DATABASE_URL
 ```
 
-### 2. Build & deploy the contract
+#### 1. Build & deploy the contract
 ```bash
 make build      # compile to WASM
 make test       # run unit tests
@@ -79,24 +85,15 @@ make deploy     # deploy to testnet, prints CONTRACT_ID
 ```
 Copy the printed contract ID into `.env` as `EXPLORER_CONTRACT_ID`.
 
-### 3. Start the indexer + API
+#### 2. Start the indexer + API
 ```bash
-make indexer-install
+make install
 make indexer
 ```
 
-### 4. Start the frontend
-```bash
-make frontend-install
-make frontend
-# Open http://localhost:5173
-```
+### Frontend Setup
 
-Or run both together:
-```bash
-make install
-make dev
-```
+See the [pero-j-frontend](https://github.com/your-org/pero-j-frontend) repository for frontend setup instructions.
 
 ---
 
